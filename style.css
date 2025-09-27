@@ -1,0 +1,262 @@
+body {
+    font-family: sans-serif;
+    /* ΑΛΛΑΓΕΣ: Προσθήκη εικόνας φόντου */
+    background-image: url('photos/fondo4.png');
+    background-size: cover; /* Καλύπτει όλο το φόντο */
+    background-position: center; /* Κεντράρει την εικόνα */
+    background-repeat: no-repeat; /* Αποτρέπει την επανάληψη */
+    background-attachment: fixed; /* Κρατάει την εικόνα σταθερή κατά το scroll */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.controls {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.game-link-container {
+    position: relative; /* Τοποθετείται σε σχέση με το γονικό πλαίσιο */
+    width: 100%;
+    height: 100px;
+    /* Οι σύνδεσμοι παιχνιδιών τοποθετούνται μέσα στο HTML */
+}
+
+.game-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.game-button:hover {
+    background-color: #218838;
+}
+
+.dashboards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.dashboard {
+    flex: 1;
+    min-width: 600px;
+    /* ΑΛΛΑΓΗ: Χρήση ημιδιαφανούς λευκού φόντου για να φαίνεται η εικόνα από πίσω */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.combination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.photos-container img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+}
+
+.controls button,
+.note-selection-section button,
+.search-section button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+}
+
+.controls button:hover,
+.note-selection-section button:hover,
+.search-section button:hover {
+    background-color: #0056b3;
+}
+
+#check-button, #reset-selection-button {
+    width: 167px;
+    height: 57px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+#check-button {
+    background-color: #90EE90;
+    color: #333;
+}
+
+#check-button:hover {
+    background-color: #7CFC00;
+}
+
+#reset-selection-button {
+    background-color: #D3D3D3;
+    color: #333;
+}
+
+#reset-selection-button:hover {
+    background-color: #C0C0C0;
+}
+
+.arrow-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    user-select: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.arrow-circle:hover {
+    background-color: #0056b3;
+}
+
+.arrow-circle:active {
+    transform: scale(0.95);
+}
+
+.search-section {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-section input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 150px;
+}
+
+.note-selection-section {
+    position: relative;
+    margin-top: 40px;
+    padding: 20px;
+    /* ΑΛΛΑΓΗ: Χρήση ημιδιαφανούς λευκού φόντου για να φαίνεται η εικόνα από πίσω */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#note-selection-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#note-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.note-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    width: 75px;
+    height: 75px;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 36px;
+    transition: background-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 0 0 #333;
+    position: relative;
+    top: 0;
+}
+
+.note-button:active {
+    box-shadow: 0 2px 0 0 #333;
+    top: 3px;
+}
+
+.note-button.selected {
+    background-color: #28a745;
+    color: white;
+    border-color: #218838;
+    transform: scale(1.05);
+}
+
+#feedback-message {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 25px;
+}
+
+.correct {
+    color: #28a745;
+}
+
+.incorrect {
+    color: #dc3545;
+}
+
+#feedback-image-frame {
+    width: 250px;
+    height: 250px;
+    margin: 20px auto 0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+#feedback-image-frame img {
+    max-width: 100%;
+    max-height: 100%;
+}

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Μουσικό Παιχνίδι</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>Μουσικό Παιχνίδι</h1>
+        </header>
+
+        <div class="back-link">
+            <a href="index.html" class="back-button">Επιστροφή</a>
+        </div>
+        <div class="dashboards">
+            <div class="dashboard">
+                <h2>Μουσικός Συνδυασμός</h2>
+                <div class="combination-container">
+                    <div id="prev-arrow" class="arrow-circle">&lt;</div>
+                    <div class="content">
+                        <div class="photos-container">
+                            </div>
+                    </div>
+                    <div id="next-arrow" class="arrow-circle">&gt;</div>
+                </div>
+                <div class="search-section">
+                    <input type="number" id="search-input" placeholder="Αριθμός άσκησης">
+                    <button id="search-button">Αναζήτηση</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <h2 id="game-title">Επιλέξτε τον Σωστό Συνδυασμό</h2>
+            <div id="answer-buttons-container">
+                </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
+
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+/* ΝΕΟ ΣΤΥΛ ΓΙΑ ΤΟ ΚΟΥΜΠΙ ΕΠΙΣΤΡΟΦΗΣ */
+.back-link {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6c757d; /* Ένα ουδέτερο γκρι χρώμα */
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+}
+/* ΤΕΛΟΣ ΝΕΟΥ ΣΤΥΛ */
+
+.dashboards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.dashboard {
+    flex: 1;
+    min-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.combination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; 
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.photos-container img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+}
+
+.arrow-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    user-select: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.arrow-circle:hover {
+    background-color: #0056b3;
+}
+
+.arrow-circle:active {
+    transform: scale(0.95);
+}
+
+.search-section {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-section input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 150px;
+}
+
+.game-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#game-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#answer-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.answer-button {
+    width: 440px;
+    height: 80px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.answer-button:hover {
+    background-color: #0056b3;
+}
+
+.answer-button.correct {
+    background-color: #28a745; /* Πράσινο */
+}
+
+.answer-button.wrong {
+    background-color: #dc3545; /* Κόκκινο */
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const combinations = [
+['F6', 'F6', 'F5', 'F6'],
+['F6', 'F6', 'G5', 'C5'],
+['F6', 'F6', 'G5', 'D5'],
+['F6', 'F6', 'G5', 'E5'],
+['F6', 'F6', 'G5', 'F5'],
+['F6', 'F6', 'G5', 'G5'],
+['F6', 'F6', 'G5', 'A5'],
+['F6', 'F6', 'G5', 'B5'],
+['F6', 'F6', 'G5', 'C6'],
+['F6', 'F6', 'G5', 'D6'],
+['F6', 'F6', 'G5', 'E6'],
+['F6', 'F6', 'G5', 'F6'],
+['F6', 'F6', 'A5', 'C5'],
+['F6', 'F6', 'A5', 'D5'],
+['F6', 'F6', 'A5', 'E5'],
+['F6', 'F6', 'A5', 'F5'],
+['F6', 'F6', 'A5', 'G5'],
+['F6', 'F6', 'A5', 'A5'],
+['F6', 'F6', 'A5', 'B5'],
+['F6', 'F6', 'A5', 'C6'],
+['F6', 'F6', 'A5', 'D6'],
+['F6', 'F6', 'A5', 'E6'],
+['F6', 'F6', 'A5', 'F6'],
+['F6', 'F6', 'B5', 'C5'],
+['F6', 'F6', 'B5', 'D5'],
+['F6', 'F6', 'B5', 'E5'],
+['F6', 'F6', 'B5', 'F5'],
+['F6', 'F6', 'B5', 'G5'],
+['F6', 'F6', 'B5', 'A5'],
+['F6', 'F6', 'B5', 'B5'],
+['F6', 'F6', 'B5', 'C6'],
+['F6', 'F6', 'B5', 'D6'],
+['F6', 'F6', 'B5', 'E6'],
+['F6', 'F6', 'B5', 'F6'],
+['F6', 'F6', 'C6', 'C5'],
+['F6', 'F6', 'C6', 'D5'],
+['F6', 'F6', 'C6', 'E5'],
+['F6', 'F6', 'C6', 'F5'],
+['F6', 'F6', 'C6', 'G5'],
+['F6', 'F6', 'C6', 'A5'],
+['F6', 'F6', 'C6', 'B5'],
+['F6', 'F6', 'C6', 'C6'],
+['F6', 'F6', 'C6', 'D6'],
+['F6', 'F6', 'C6', 'E6'],
+['F6', 'F6', 'C6', 'F6'],
+['F6', 'F6', 'D6', 'C5'],
+['F6', 'F6', 'D6', 'D5'],
+['F6', 'F6', 'D6', 'E5'],
+['F6', 'F6', 'D6', 'F5'],
+['F6', 'F6', 'D6', 'G5'],
+['F6', 'F6', 'D6', 'A5'],
+['F6', 'F6', 'D6', 'B5'],
+['F6', 'F6', 'D6', 'C6'],
+['F6', 'F6', 'D6', 'D6'],
+['F6', 'F6', 'D6', 'E6'],
+['F6', 'F6', 'D6', 'F6'],
+['F6', 'F6', 'E6', 'C5'],
+['F6', 'F6', 'E6', 'D5'],
+['F6', 'F6', 'E6', 'E5'],
+['F6', 'F6', 'E6', 'F5'],
+['F6', 'F6', 'E6', 'G5'],
+['F6', 'F6', 'E6', 'A5'],
+['F6', 'F6', 'E6', 'B5'],
+['F6', 'F6', 'E6', 'C6'],
+['F6', 'F6', 'E6', 'D6'],
+['F6', 'F6', 'E6', 'E6'],
+['F6', 'F6', 'E6', 'F6'],
+['F6', 'F6', 'F6', 'C5'],
+['F6', 'F6', 'F6', 'D5'],
+['F6', 'F6', 'F6', 'E5'],
+['F6', 'F6', 'F6', 'F5'],
+['F6', 'F6', 'F6', 'G5'],
+['F6', 'F6', 'F6', 'A5'],
+['F6', 'F6', 'F6', 'B5'],
+['F6', 'F6', 'F6', 'C6'],
+['F6', 'F6', 'F6', 'D6'],
+['F6', 'F6', 'F6', 'E6'],
+['F6', 'F6', 'F6', 'F6'],     ];
+
+    const noteNames = {
+        'C5': 'Ντο', 'D5': 'Ρε', 'E5': 'Μι',
+        'F5': 'Φα', 'G5': 'Σολ', 'A5': 'Λα',
+        'B5': 'Σι', 'C6': 'Ντο', 'D6': 'Ρε',
+        'E6': 'Μι', 'F6': 'Φα'
+    };
+    
+    const allNotes = Object.keys(noteNames);
+
+    let currentCombinationIndex = 0;
+    let correctNotesString;
+    let lastCorrectButtonIndex = -1;
+
+    const prevArrow = document.getElementById('prev-arrow');
+    const nextArrow = document.getElementById('next-arrow');
+    const photosContainer = document.querySelector('.photos-container');
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const answerButtonsContainer = document.getElementById('answer-buttons-container');
+
+    function loadPhotos(combo) {
+        photosContainer.innerHTML = '';
+        const solKeyImg = document.createElement('img');
+        solKeyImg.src = 'photos/solkey.png';
+        solKeyImg.alt = 'Κλειδί του Σολ';
+        photosContainer.appendChild(solKeyImg);
+
+        combo.forEach(photoName => {
+            const img = document.createElement('img');
+            img.src = `photos/${photoName}.png`;
+            img.alt = photoName;
+            photosContainer.appendChild(img);
+        });
+    }
+    
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function createAnswers() {
+        const currentCombo = combinations[currentCombinationIndex];
+        const comboNotesString = currentCombo.map(note => noteNames[note]).join(', ');
+        correctNotesString = comboNotesString;
+
+        const answers = [correctNotesString];
+        const incorrectAnswers = [];
+
+        while (incorrectAnswers.length < 3) {
+            let newIncorrectAnswer;
+            
+            if (incorrectAnswers.length === 0) {
+                const tempCombo = [...currentCombo];
+                const noteToChangeIndex = Math.floor(Math.random() * tempCombo.length);
+                let newNote;
+                do {
+                    newNote = allNotes[Math.floor(Math.random() * allNotes.length)];
+                } while (newNote === tempCombo[noteToChangeIndex]);
+                tempCombo[noteToChangeIndex] = newNote;
+                newIncorrectAnswer = tempCombo.map(note => noteNames[note]).join(', ');
+            } else {
+                const tempCombo = [];
+                for (let i = 0; i < currentCombo.length; i++) {
+                    const randomNote = allNotes[Math.floor(Math.random() * allNotes.length)];
+                    tempCombo.push(randomNote);
+                }
+                newIncorrectAnswer = tempCombo.map(note => noteNames[note]).join(', ');
+            }
+
+            if (answers.indexOf(newIncorrectAnswer) === -1 && incorrectAnswers.indexOf(newIncorrectAnswer) === -1) {
+                incorrectAnswers.push(newIncorrectAnswer);
+            }
+        }
+        
+        const allAnswers = [...answers, ...incorrectAnswers];
+        shuffleArray(allAnswers);
+
+        answerButtonsContainer.innerHTML = '';
+        allAnswers.forEach((answerText) => {
+            const button = document.createElement('button');
+            button.classList.add('answer-button');
+            button.textContent = answerText;
+            button.dataset.correct = (answerText === correctNotesString);
+            
+            button.addEventListener('click', () => handleAnswer(button));
+            answerButtonsContainer.appendChild(button);
+        });
+        
+    }
+    
+    function handleAnswer(button) {
+        if (button.dataset.correct === 'true') {
+            button.classList.add('correct');
+            // Απενεργοποίηση όλων των κουμπιών μετά τη σωστή απάντηση
+            const allButtons = document.querySelectorAll('.answer-button');
+            allButtons.forEach(btn => btn.disabled = true);
+        } else {
+            button.classList.add('wrong');
+            button.disabled = true; // Απενεργοποιεί μόνο το λάθος κουμπί
+        }
+        
+    }
+
+    function loadCombination() {
+        // Καθαρισμός προηγούμενων κλάσεων
+        const allButtons = document.querySelectorAll('.answer-button');
+        allButtons.forEach(btn => {
+            btn.classList.remove('correct', 'wrong');
+            btn.disabled = false;
+        });
+
+        let randomIndex;
+        const buttonCount = 4;
+        const requiredDistance = 50;
+        
+        if (combinations.length > requiredDistance * 2) {
+            do {
+                randomIndex = Math.floor(Math.random() * combinations.length);
+            } while (Math.abs(randomIndex - currentCombinationIndex) < requiredDistance);
+        } else {
+            randomIndex = Math.floor(Math.random() * combinations.length);
+        }
+
+        currentCombinationIndex = randomIndex;
+        
+        loadPhotos(combinations[currentCombinationIndex]);
+        createAnswers();
+    }
+
+    prevArrow.addEventListener('click', loadCombination);
+    nextArrow.addEventListener('click', loadCombination);
+
+    searchButton.addEventListener('click', () => {
+        const value = parseInt(searchInput.value);
+        if (!isNaN(value) && value >= 1 && value <= combinations.length) {
+            currentCombinationIndex = value - 1;
+            loadPhotos(combinations[currentCombinationIndex]);
+            createAnswers();
+        } else {
+            alert('Εισάγετε έναν έγκυρο αριθμό άσκησης.');
+        }
+    });
+
+    loadCombination();
+});
+
+όπως είναι αυτό το παιχνίδι θέλω να μου φτιάξεις εάν καινούργιο που να έχει χρόνο. Ο χρήστης πρώτα θα επιλέγει από 1 έως 5 λεπτά χρόνο. Μετά θα πατάει έναρξη. Όταν κάνει λάθος θα αλλάζεις αυτόματα την άσκηση Δεν θα έχει δεύτερη ευκαιρία. Όταν τελειώσσει ο χρόνος θα σταματάει η προσπάθεια και θα βγάζεις σε πινακάκι τα αποτελέσματα Συνολικές προσπάθειες, Σωστές, Λάθος, και συνολικός χρόνος προσπαθειας. Θέλω το παιχνίδι να είναι ακριβώς σαν το άλλο μόνο που θα προσθέσεις την παραμτερο του χρονου

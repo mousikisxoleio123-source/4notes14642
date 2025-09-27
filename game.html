@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Μουσικό Παιχνίδι</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>Μουσικό Παιχνίδι</h1>
+        </header>
+
+        <div class="back-link">
+            <a href="index.html" class="back-button">Επιστροφή</a>
+        </div>
+        <div class="dashboards">
+            <div class="dashboard">
+                <h2>Μουσικός Συνδυασμός</h2>
+                <div class="combination-container">
+                    <div id="prev-arrow" class="arrow-circle">&lt;</div>
+                    <div class="content">
+                        <div class="photos-container">
+                            </div>
+                    </div>
+                    <div id="next-arrow" class="arrow-circle">&gt;</div>
+                </div>
+                <div class="search-section">
+                    <input type="number" id="search-input" placeholder="Αριθμός άσκησης">
+                    <button id="search-button">Αναζήτηση</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <h2 id="game-title">Επιλέξτε τον Σωστό Συνδυασμό</h2>
+            <div id="answer-buttons-container">
+                </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
